@@ -52,11 +52,5 @@ app.get('/from-file', async (req, res) => {
     return res.send(`<h1>Hi there</h1> <div>${image}</div>`)
 })
 
-app.get('/all-reports', async (req, res) => {
-    const { items } = await pb.collection('reports').getList()
-
-    return 
-})
-
 
 app.listen(PORT, () => console.log(`Listening to port ${PORT}`))
