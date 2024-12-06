@@ -1,5 +1,6 @@
 import express from "express"
 import PocketBase from "pocketbase"
+import moment from "moment"
 import { retrieveFileData } from "./services/filesApi.js"
 
 const app = express()
@@ -50,6 +51,19 @@ app.get('/from-file', async (req, res) => {
         }
     }
     return res.send(`<h1>Hi there</h1> <div>${image}</div>`)
+})
+
+app.get('/reports', async (req, res) => {
+    const { items } = await pb.collection('reports').getList(1, 50, {fields: "json_data"})
+    const raw_reports = []
+
+    for (let i in items) {
+        raw_reports.push(items[i]["json_data"])
+    }
+
+    console.log(raw_reports)
+
+    return res.json({ reports: "hi" })
 })
 
 
